@@ -1,0 +1,39 @@
+version: "3"
+
+networks: 
+  backend:
+
+volumes:
+  db-data:
+
+services:
+  db:
+    image: postgres
+    environment: 
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: parkinglot
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks: 
+      - backend
+  app:
+    build: .
+    volumes:
+      - ./app:/app
+    networks: 
+      - backend
+    ports:
+      - "8080:8080"
+    environment:
+      PGUSER: user
+      PGDATABASE: parkinglot
+      PGPASSWORD: password
+      PGPORT: 5432
+      PGHOST: db
+    depends_on:
+      - db
+    command: /node_modules/.bin/nodemon -L --watch /app --inspect=0.0.0.0:9222 --nolazy /app/server/index.js
