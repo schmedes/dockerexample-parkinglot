@@ -3,7 +3,7 @@ const query = require('./query')
 
 const getFreePlaces = () =>
     query(
-        `SELECT {MAX_LIMITS} - COUNT(1) FROM Parkinglot WHERE Exitdate IS NULL`
+        `SELECT ${MAX_LIMITS} - COUNT(1) AS FreePlaces FROM Parkinglot WHERE Exitdate IS NULL`
     ).then(res => res.rows[0])
 
 const parkCar = (licencePlate, reserved) =>
