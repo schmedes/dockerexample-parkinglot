@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parken</title>
+</head>
+
+<body>
+    <h1>Parkvorgang</h1>
+    <div>Freie Plätze:
+        <span class="freeLot"></span>
+    </div>
+    <form action="/parkcar" method="post">
+        <label for="licenceplate">Kennzeichen</label>
+        <input type="text" name="licenceplate" id="licenceplate">
+        <label for="reserved">Reserviert</label>
+        <input type="checkbox" name="reserved" id="reserved">
+        <input type="submit" value="Parken">
+    </form>
+</body>
+<script src="main.js"></script>
+
+</html>

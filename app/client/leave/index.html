@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <title>Verlassen</title>
+</head>
+
+<body>
+    <h1>Ausparkvorgang</h1>
+    <form action="/leaveparkinglot" method="post">
+        <label for="licenceplate">Kennzeichen</label>
+        <input type="text" name="licenceplate" id="licenceplate">
+        <input type="submit" value="Ausparken">
+    </form>
+    <div class="error">
+
+    </div>
+    <div class="parkinfo">
+        <div>
+            <label for="startdate">Startzeitpunkt: </label>
+            <span name="startdate"></span>
+        </div>
+        <div>
+            <label for="enddate">Endzeitpunkt: </label>
+            <span name="enddate"></span>
+        </div>
+        <div class="cost">
+
+        </div>
+        <input type="button" class="leavebutton" value="Ausparken">
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>

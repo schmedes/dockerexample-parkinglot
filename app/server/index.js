@@ -1,24 +1,32 @@
 const polka = require('polka')
 const servestatic = require('serve-static')
 const { join } = require('path')
-const { json } = require('body-parser')
+const { json, urlencoded } = require('body-parser')
 const {
-    getAllParkingCars,
-    getFreePlaces,
+    getParkingCars,
     parkCar,
     leaveParkinglot
 } = require('./data/parkinglot')
+const { calculateFreePlaces } = require('./services/parkinglotservice')
 const send = require('@polka/send-type')
 
 polka()
-    .use(servestatic(join(__dirname, '../client')), json())
+    .use(
+        servestatic(join(__dirname, '../client')),
+        urlencoded({ extended: false }),
+        json()
+    )
     .get('/allcars', async (req, res) => {
-        const parkingCars = await getAllParkingCars()
+        const parkingCars = await getParkingCars()
         send(res, 200, parkingCars)
     })
     .get('/freeplaces', async (req, res) => {
-        const freeplaces = await getFreePlaces()
+        const freeplaces = await calculateFreePlaces()
         send(res, 200, freeplaces)
+    })
+    .get('/parkinfo', async (req, res) => {
+        const parkinfo = await getParkingCars(req.query.licenceplate)
+        send(res, 200, parkinfo)
     })
     .post('/parkcar', async (req, res) => {
         const { licenceplate, reserved } = req.body

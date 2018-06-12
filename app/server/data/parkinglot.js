@@ -1,10 +1,15 @@
 const { MAX_LIMITS, RESERVED_PLACES } = require('../constants')
 const query = require('./query')
 
-const getFreePlaces = () =>
+const getFreePlaces = async () =>
     query(
         `SELECT ${MAX_LIMITS} - COUNT(1) AS FreePlaces FROM Parkinglot WHERE Exitdate IS NULL`
-    ).then(res => res.rows[0])
+    ).then(res => parseInt(res.rows[0].freeplaces, 10))
+
+const getUsedReservedPlaces = () =>
+    query(
+        `SELECT ${RESERVED_PLACES} - COUNT(1) AS ReservedPlaces FROM Parkinglot WHERE Exitdate IS NULL AND Reserved='1'`
+    ).then(res => parseInt(res.rows[0].reservedplaces, 10))
 
 const parkCar = (licencePlate, reserved) =>
     query(
@@ -18,14 +23,16 @@ const leaveParkinglot = licencePlate =>
         [new Date(), licencePlate]
     )
 
-const getAllParkingCars = () =>
-    query(`SELECT * FROM Parkinglot where Exitdate IS NULL`).then(
-        res => res.rows
-    )
+const getParkingCars = (licenceplate = '%%') =>
+    query(
+        `SELECT * FROM Parkinglot where Exitdate IS NULL AND Licenceplate LIKE $1`,
+        [licenceplate]
+    ).then(res => res.rows)
 
 module.exports = {
     getFreePlaces,
-    getAllParkingCars,
+    getParkingCars,
     leaveParkinglot,
-    parkCar
+    parkCar,
+    getUsedReservedPlaces
 }

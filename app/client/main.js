@@ -5,9 +5,18 @@ const leaveParkinglotContainer = document.querySelector('#leaveLot')
 const freeSpaces = () =>
     fetch('/freeplaces')
         .then(res => res.json())
-        .then(res => (freeSpacesContainer.innerHTML = res.freeplaces))
+        .then(
+            res =>
+                (freeSpacesContainer.innerHTML = `${
+                    res.freePlaces - res.reserved > 4
+                        ? res.freePlaces - res.reserved
+                        : 0
+                }`)
+        )
 
 freeSpaces()
+
+setInterval(() => freeSpaces(), 1000)
 
 leaveParkinglotContainer.addEventListener('keypress', e => {
     if (e.keyCode !== 13) return
@@ -19,9 +28,7 @@ leaveParkinglotContainer.addEventListener('keypress', e => {
         headers: {
             'content-type': 'application/json'
         }
-    })
-        .then(() => (e.target.value = ''))
-        .then(() => freeSpaces())
+    }).then(() => (e.target.value = ''))
 })
 
 parkcarContainer.addEventListener('keypress', e => {
@@ -32,7 +39,5 @@ parkcarContainer.addEventListener('keypress', e => {
         headers: {
             'content-type': 'application/json'
         }
-    })
-        .then(() => (e.target.value = ''))
-        .then(() => freeSpaces())
+    }).then(() => (e.target.value = ''))
 })
