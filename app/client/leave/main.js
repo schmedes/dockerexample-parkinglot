@@ -1,6 +1,6 @@
 const submitContainer = document.querySelector('input[type="submit"]')
 const valueContainer = document.querySelector('#licenceplate')
-const leaveContainer = document.querySelector('.leavebutton')
+const leaveContainer = document.querySelector('#leave')
 const errorContainer = document.querySelector('.error')
 const costcontainer = document.querySelector('.cost')
 const parkinfo = document.querySelector('.parkinfo')
@@ -27,9 +27,13 @@ valueContainer.addEventListener('keydown', () => {
 })
 
 function activateParkinfo(startdate, entity) {
-    console.log(startdate)
-    if (!startdate) return parkinfo.setAttribute('style', '')
+    if (!startdate) {
+        leaveContainer.disabled = true
+        parkinfo.setAttribute('style', '')
+        return
+    }
 
+    leaveContainer.disabled = false
     parkinfo.setAttribute('style', 'display: block')
     startDate.innerHTML = startdate.toLocaleString()
     endDate.innerHTML = new Date().toLocaleString()

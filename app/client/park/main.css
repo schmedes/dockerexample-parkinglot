@@ -30,13 +30,10 @@ h1 {
     background-color: #fff;
 }
 
-.parkinfo {
-    display: none;
-}
-
 main {
     height: 80vh;
     display: flex;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
 }
@@ -45,7 +42,7 @@ main {
     display: flex;
     flex-direction: column;
     text-align: start;
-    padding-top: 40%;
+    flex-basis: 35%;
 }
 
 .parkform div {
@@ -61,7 +58,7 @@ nav {
     justify-content: space-around;
 }
 
-.leavebutton {
+.parkbutton {
     color: black;
     text-decoration: none;
     background-color: #fff;
@@ -71,12 +68,12 @@ nav {
     flex-basis: 30%;
 }
 
-.leavebutton:hover {
+.parkbutton:hover {
     background-color: black;
     color: white;
 }
 
-.leavebutton:disabled {
+.parkbutton:disabled {
     background-color: #bdbdbd;
     color: black;
 }

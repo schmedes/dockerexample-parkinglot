@@ -10,28 +10,37 @@
 </head>
 
 <body>
-    <h1>Ausparkvorgang</h1>
-    <form action="/leaveparkinglot" method="post">
-        <label for="licenceplate">Kennzeichen</label>
-        <input type="text" name="licenceplate" id="licenceplate">
-        <input type="submit" value="Ausparken">
-    </form>
-    <div class="error">
+    <div class="content">
+        <h1>Ausparkvorgang</h1>
+        <main>
+            <form class="parkform" action="/leaveparkinglot" method="post">
+                <div>
+                    <label for="licenceplate">Kennzeichen</label>
+                    <input type="text" name="licenceplate" id="licenceplate">
+                    <input type="submit" value="Prüfen">
+                </div>
+                <div class="error">
 
-    </div>
-    <div class="parkinfo">
-        <div>
-            <label for="startdate">Startzeitpunkt: </label>
-            <span name="startdate"></span>
-        </div>
-        <div>
-            <label for="enddate">Endzeitpunkt: </label>
-            <span name="enddate"></span>
-        </div>
-        <div class="cost">
+                </div>
+            </form>
+            <div class="parkinfo">
+                <div>
+                    <label for="startdate">Startzeitpunkt: </label>
+                    <span name="startdate"></span>
+                </div>
+                <div>
+                    <label for="enddate">Endzeitpunkt: </label>
+                    <span name="enddate"></span>
+                </div>
+                <div class="cost">
 
-        </div>
-        <input type="button" class="leavebutton" value="Ausparken">
+                </div>
+            </div>
+        </main>
+        <nav>
+            <input disabled id="leave" type="button" class="leavebutton" value="Ausparken">
+            <a class="leavebutton" href="/">Abbrechen</a>
+        </nav>
     </div>
 </body>
 <script src="main.js"></script>

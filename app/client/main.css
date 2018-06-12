@@ -30,53 +30,34 @@ h1 {
     background-color: #fff;
 }
 
-.parkinfo {
-    display: none;
-}
-
 main {
     height: 80vh;
     display: flex;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-}
-
-.parkform {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    padding-top: 40%;
-}
-
-.parkform div {
-    padding-top: 20px;
 }
 
 .freelot-container {
     font-size: 1.75rem;
 }
 
-nav {
+.nav-buttons {
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-around;
 }
 
-.leavebutton {
+.linkbutton {
     color: black;
     text-decoration: none;
-    background-color: #fff;
     font-size: 1.5rem;
     border: 2px solid black;
     padding: 5px;
     flex-basis: 30%;
 }
 
-.leavebutton:hover {
+.linkbutton:hover {
     background-color: black;
     color: white;
-}
-
-.leavebutton:disabled {
-    background-color: #bdbdbd;
-    color: black;
 }
