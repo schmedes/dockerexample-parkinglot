@@ -1,14 +1,16 @@
 const freeSpacesContainer = document.querySelector('.freeLot')
 const submitContainer = document.querySelector('input[type="submit"]')
+const reservedContainer = document.querySelector('#reserved')
 
 const freeSpaces = () =>
     fetch('/freeplaces')
         .then(res => res.json())
         .then(res => {
-            const freePlaces =
-                res.freePlaces - res.reserved > 4
+            const freePlaces = !reservedContainer.checked
+                ? res.freePlaces - res.reserved > 4
                     ? res.freePlaces - res.reserved
                     : 0
+                : res.freePlaces
             submitContainer.disabled = !freePlaces
             freeSpacesContainer.innerHTML = `${freePlaces}`
         })
@@ -17,10 +19,12 @@ freeSpaces()
 
 setInterval(() => freeSpaces(), 2000)
 
+reservedContainer.addEventListener('change', () => freeSpaces)
+
 submitContainer.addEventListener('click', e => {
     e.preventDefault()
     const licencePlate = document.querySelector('#licenceplate').value
-    const reserved = document.querySelector('#reserved').checked
+    const reserved = reservedContainer.checked
 
     fetch('/parkcar', {
         method: 'POST',

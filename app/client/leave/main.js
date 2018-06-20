@@ -39,8 +39,9 @@ function activateParkinfo(startdate, entity) {
     endDate.innerHTML = new Date().toLocaleString()
     entity.reserved
         ? (costcontainer.innerHTML = '')
-        : (costcontainer.innerHTML = `Preis: ${(startdate.getHours() -
-              new Date().getHours() || 1) * 5}€`)
+        : (costcontainer.innerHTML = `Preis: ${Math.ceil(
+              (new Date().getTime() - startdate.getTime()) / (1000 * 60 * 60)
+          ) * 5}€`)
 }
 
 leaveContainer.addEventListener('click', () => {
